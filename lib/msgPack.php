@@ -62,8 +62,15 @@ class msgPack
 
     public static function packStr16($str)
     {
-        $strArr  = str_split($str);
-        $strLen  = count($strArr);
+
+        if (!empty($str)) {
+            $strArr = str_split($str);
+            $strLen = count($strArr);
+        } else {
+            $strArr = [];
+            $strLen = 0;
+        }
+
         $packs   = [];
         $packs[] = self::uint8Array(hexdec(self::STR16));
         $packs[] = $strLen >> 8;
